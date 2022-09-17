@@ -28,8 +28,13 @@
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
 
-        <!-- Data -->
+        <!-- data -->
         <script type="text/javascript" src="./datasforListing.js"></script>
+        
+        <!-- custom styles -->
+        <style>
+            th, td { text-align: center !important; }
+        </style>
 
     </head>
     <body>
@@ -101,19 +106,19 @@
                                 onInput={(e)=>{
                                     setTableRows(e.target.value);
                                 }}/> 개 행으로 출력
-                            <DataTable style={{ width:'80%', minWidth:'500px' }}
+                            <DataTable style={{ width:'100%', minWidth:'500px' }}
                                 value={applicants} rows={tableRows} emptyMessage="해당하는 정보가 없습니다"           
                                 showGridlines paginator
                                 responsiveLayout="scroll"
                                 frozenWidth="328px" scrollable scrollHeight="275px"
                             >
-                                <Column field="식별번호" header="식별번호" style={{maxWidth:'200px'}} sortable
+                                <Column field="식별번호" header="식별번호" style={{maxWidth:'100px'}} sortable
                                 ></Column>
-                                <Column field="이름" header="이름" style={{maxWidth:'200px'}} sortable
+                                <Column field="이름" header="이름" style={{maxWidth:'100px'}} sortable
                                 ></Column>
-                                <Column field="성별" header="성별" style={{maxWidth:'200px'}} sortable
+                                <Column field="성별" header="성별" style={{maxWidth:'100px'}} sortable
                                 ></Column>
-                                <Column field="거주지" header="거주지" style={{maxWidth:'200px'}} sortable
+                                <Column field="거주지" header="거주지" style={{maxWidth:'150px'}} sortable
                                 ></Column>
                             </DataTable>
                         </div>
