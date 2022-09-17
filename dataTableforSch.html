@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>DataTable for Searching</title>
+
+        <!-- ★skeleton css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" /> 
+
+        <!-- PrimeReact -->
+        <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.min.css" />
+
+        <!-- Dependencies -->
+        <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/react-transition-group@4.4.2/dist/react-transition-group.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+
+        <!-- Data -->
+        <script type="text/javascript" src="./datasforListing.js"></script>
+
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const { useEffect, useState } = React;
+            const { DataTable } = primereact.datatable;
+            const { Column } = primereact.column;
+
+            let globalData = [
+                ...Array(99).fill({ 식별번호:1, 이름:2, 성별:3, 거주지:4 })
+            ];
+            globalData = [
+                { 식별번호:1, 이름:'jason', 성별:'남', 거주지:'a' },
+                { 식별번호:2, 이름:'raul', 성별:'남', 거주지:'b' },
+                { 식별번호:3, 이름:'joseph', 성별:'여', 거주지:'b' },
+                { 식별번호:4, 이름:'josuhua', 성별:'여', 거주지:'a' },
+                { 식별번호:5, 이름:'rafael', 성별:'여', 거주지:'c' },
+            ];
+            globalData = datasforListing;
+            const DataTableBasicDemo = () => {
+                const [applicants, setApplicants] = useState(globalData);
+                const [tableRows, setTableRows] = useState(10);
+
+                document.onkeypress = (e)=>{
+                    if(e.key === 'Enter') {
+                        filterFromDataTable();
+                    }
+                }
+
+                function filterFromDataTable() {
+                    const searchType = document.getElementById('searchType').value;
+                    const searchValue = document.getElementById('searchValue').value;
+                    let fillteredList = 
+                        globalData.filter((itm)=>{
+                            //console.log('filtering...', itm, itm[searchType], '===', searchValue);
+                            return String(itm[searchType])===searchValue
+                        });
+                    //fillteredList = globalData.filter((itm)=>String(itm.식별번호)===searchValue);
+                    console.log('you have filltered by', searchType, searchType, 
+                                    'from', globalData, fillteredList);
+                    setApplicants([...fillteredList]);
+                }
+
+                return (
+                <div>
+                    <h3>DataTable for Searching</h3>
+                    <select id='searchType'>
+                        {/*
+                        <option value=''>검색할 항목을 선택하세요</option> */}
+                        <option value='식별번호'>식별번호</option>
+                        <option value='이름'>이름</option>
+                        <option value='성별'>성별</option>
+                        <option value='거주지'>거주지</option>
+                    </select>
+                    <input id='searchValue' type="text" placeholder="검색할 정보를 입력하세요" />
+                    <button onClick={filterFromDataTable}>찾기</button>
+                    <br/><br/>
+                    <div>
+                        <div className="card">
+                            <input type="text" value={tableRows} 
+                                onInput={(e)=>{
+                                    setTableRows(e.target.value);
+                                }}/> 개 행으로 출력
+                            <DataTable style={{ width:'80%', minWidth:'500px' }}
+                                value={applicants} rows={tableRows} emptyMessage="해당하는 정보가 없습니다"           
+                                showGridlines paginator
+                                responsiveLayout="scroll"
+                                frozenWidth="328px" scrollable scrollHeight="275px"
+                            >
+                                <Column field="식별번호" header="식별번호" style={{maxWidth:'200px'}}
+                                ></Column>
+                                <Column field="이름" header="이름" style={{maxWidth:'200px'}}
+                                ></Column>
+                                <Column field="성별" header="성별" style={{maxWidth:'200px'}}
+                                ></Column>
+                                <Column field="거주지" header="거주지" style={{maxWidth:'200px'}}
+                                ></Column>
+                            </DataTable>
+                        </div>
+                    </div>
+                </div>
+                );
+            }
+                            
+            const rootElement = document.getElementById("root");
+            ReactDOM.render(<DataTableBasicDemo />, rootElement);
+
+        </script>
+    </body>
+</html>
+ 
