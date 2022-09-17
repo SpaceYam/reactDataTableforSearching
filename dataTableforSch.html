@@ -66,7 +66,7 @@
                     let fillteredList = 
                         globalData.filter((itm)=>{
                             //console.log('filtering...', itm, itm[searchType], '===', searchValue);
-                            return String(itm[searchType])===searchValue
+                            return String(itm[searchType]).includes(searchValue)
                         });
                     //fillteredList = globalData.filter((itm)=>String(itm.식별번호)===searchValue);
                     console.log('you have filltered by', searchType, searchType, 
