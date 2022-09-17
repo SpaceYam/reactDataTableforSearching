@@ -50,6 +50,13 @@
                 { 식별번호:5, 이름:'rafael', 성별:'여', 거주지:'c' },
             ];
             globalData = datasforListing;
+            globalData = globalData.sort((itmA, itmB)=>{
+                if(itmA.등록일!=undefined && itmB.등록일!=undefined) {
+                    let dateA = itmA.등록일.split('-'); let dateB = itmB.등록일.split('-');
+                    //console.log('sort by date', new Date(dateA[0],dateA[1],dateA[2]).getTime(), new Date(dateB[0],dateB[1],dateB[2]).getTime());
+                    return new Date(dateB[0],dateB[1],dateB[2]).getTime()-new Date(dateA[0],dateA[1],dateA[2]).getTime()
+                }
+            });
             const DataTableBasicDemo = () => {
                 const [applicants, setApplicants] = useState(globalData);
                 const [tableRows, setTableRows] = useState(10);
@@ -100,13 +107,13 @@
                                 responsiveLayout="scroll"
                                 frozenWidth="328px" scrollable scrollHeight="275px"
                             >
-                                <Column field="식별번호" header="식별번호" style={{maxWidth:'200px'}}
+                                <Column field="식별번호" header="식별번호" style={{maxWidth:'200px'}} sortable
                                 ></Column>
-                                <Column field="이름" header="이름" style={{maxWidth:'200px'}}
+                                <Column field="이름" header="이름" style={{maxWidth:'200px'}} sortable
                                 ></Column>
-                                <Column field="성별" header="성별" style={{maxWidth:'200px'}}
+                                <Column field="성별" header="성별" style={{maxWidth:'200px'}} sortable
                                 ></Column>
-                                <Column field="거주지" header="거주지" style={{maxWidth:'200px'}}
+                                <Column field="거주지" header="거주지" style={{maxWidth:'200px'}} sortable
                                 ></Column>
                             </DataTable>
                         </div>
