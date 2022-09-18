@@ -1,18 +1,19 @@
-[uri_license]: https://www.mozilla.org/en-US/MPL/2.0
-[uri_license_image]: https://img.shields.io/badge/MPL-2.0-blue.svg
+[[[uri_license]: [https://www.mozilla.org/en-US/MPL/2.0](https://mit-license.org/)
 
 <h1 align="center">
+  DataTableforSearching
   <br>
   <img src="" alt="">
 </h1>
 
 ## About this ##
 
-Hi it`s a DataGrid for data Processing
-it`s made by React with CDN
+Hi it's a DataGrid for data Processing
+it's made by React with CDN
 
-You don`t need a server
-just open the html and upload and rewrite then export your data
+You don't need a server
+just open the html and upload and rewrite 
+then export your data again and again
 
 have a good day!!
 
@@ -39,3 +40,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+](https://mit-license.org/)](https://mit-license.org/)
