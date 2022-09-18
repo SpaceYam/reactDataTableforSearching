@@ -1,4 +1,4 @@
-[[[uri_license]: [https://www.mozilla.org/en-US/MPL/2.0](https://mit-license.org/)
+License: [https://mit-license.org/](https://mit-license.org/)
 
 <h1 align="center">
   DataTableforSearching
