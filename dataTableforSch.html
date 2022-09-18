@@ -1,45 +1,47 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta http-equiv='X-UA-Compatible' content='ie=edge' />
         <title>DataTable for Searching</title>
-
+        <script>
+            //sessionStorage.clear();
+            var validUser = sessionStorage.getItem('validUser')
+            //if(validUser===null) location.href = "/anypages/auth.html";
+        </script>
         <!-- ★skeleton css -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" /> 
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
 
         <!-- PrimeReact -->
-        <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.min.css" />
+        <link rel='stylesheet' href='https://unpkg.com/primeicons/primeicons.css' />
+        <link rel='stylesheet' href='https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css' />
+        <link rel='stylesheet' href='https://unpkg.com/primereact/resources/primereact.min.css' />
+        <link rel='stylesheet' href='https://unpkg.com/primeflex@3.1.2/primeflex.min.css' />
 
         <!-- Dependencies -->
-        <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-        <script src="https://unpkg.com/react-transition-group@4.4.2/dist/react-transition-group.js"></script>
+        <script src='https://unpkg.com/react/umd/react.production.min.js'></script>
+        <script src='https://unpkg.com/react-dom/umd/react-dom.production.min.js'></script>
+        <script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
+        <script src='https://unpkg.com/react-transition-group@4.4.2/dist/react-transition-group.js'></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
-        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+        <script src='https://unpkg.com/primereact/api/api.min.js'></script>
+        <script src='https://unpkg.com/primereact/core/core.min.js'></script>
+        <script src='https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js'></script>
+        <script src='https://unpkg.com/primereact/column/column.min.js'></script>
+        <script src='https://unpkg.com/primereact/datatable/datatable.min.js'></script>
 
         <!-- data -->
-        <script type="text/javascript" src="./datasforListing.js"></script>
+        <script type='text/javascript' src='./static/datasforListing.js'></script>
         
         <!-- custom styles -->
         <style>
             th, td { text-align: center !important; }
         </style>
-
     </head>
     <body>
-        <div id="root"></div>
-        <script type="text/babel">
+        <div id='root'></div>
+        <script type='text/babel'>
             const { useEffect, useState } = React;
             const { DataTable } = primereact.datatable;
             const { Column } = primereact.column;
@@ -47,14 +49,23 @@
             let globalData = [
                 ...Array(99).fill({ 식별번호:1, 이름:2, 성별:3, 거주지:4 })
             ];
-            globalData = [
-                { 식별번호:1, 이름:'jason', 성별:'남', 거주지:'a' },
-                { 식별번호:2, 이름:'raul', 성별:'남', 거주지:'b' },
-                { 식별번호:3, 이름:'joseph', 성별:'여', 거주지:'b' },
-                { 식별번호:4, 이름:'josuhua', 성별:'여', 거주지:'a' },
-                { 식별번호:5, 이름:'rafael', 성별:'여', 거주지:'c' },
-            ];
-            globalData = datasforListing;
+            
+            globalData = //아래와 같은 JSON형식 데이터만 업로드 가능. JSON syntax 검사시 https://kr.piliapp.com/json/validator/ 으로
+            [
+            {
+                "식별번호":1, "이름":"jason","성별":"남","거주지":"a"
+            },{
+                "식별번호":2, "이름":"raul","성별":"남","거주지":"b"
+            },{
+                "식별번호":3, "이름":"joseph","성별":"여","거주지":"b"
+            },{
+                "식별번호":4, "이름":"josuhua","성별":"여","거주지":"a"
+            },{
+                "식별번호":5, "이름":"rafael","성별":"여","거주지":"c"
+            }
+            ]
+            //globalData = [];
+            //globalData = datasforListing;
             globalData = globalData.sort((itmA, itmB)=>{
                 if(itmA.등록일!=undefined && itmB.등록일!=undefined) {
                     let dateA = itmA.등록일.split('-'); let dateB = itmB.등록일.split('-');
@@ -63,9 +74,17 @@
                 }
             });
             const DataTableBasicDemo = () => {
+                let defColumns = {
+                    식별번호:'식별번호',
+                    이름:'이름',
+                    성별:'성별',
+                    거주지:'거주지',
+                };
+                const mappingRow = 'toMatch';
+                const [columns, setColumns] = useState(defColumns);
                 const [applicants, setApplicants] = useState(globalData);
+                const [selectedApplicants, setSelectedApplicants] = useState();
                 const [tableRows, setTableRows] = useState(10);
-
                 document.onkeypress = (e)=>{
                     if(e.key === 'Enter') {
                         filterFromDataTable();
@@ -86,51 +105,128 @@
                     setApplicants([...fillteredList]);
                 }
 
+                function getFileData(e) {
+                    let tgFile = e.target.files[0]; 
+                    let reader = new FileReader();
+                    reader.onload = ((file)=>{
+                        return function(e) {
+                            //console.log('got data as', e.target.result);
+                            globalData = JSON.parse(String(e.target.result));
+                            setApplicants(globalData);
+                            defColumns = {};
+                            globalData[0] && Object.keys(globalData[0]).map((itm)=>{
+                                if(itm==='rid' || itm===mappingRow) {}
+                                else defColumns[itm] = itm;
+                            });
+                            console.log(defColumns);
+                            setColumns(defColumns);
+                        };
+                    })(tgFile);
+                    reader.readAsText(tgFile);
+                }
+                window.onload = function(){
+                    document.getElementById('upload').addEventListener('change', getFileData, false);
+                }
+                
                 return (
                 <div>
                     <h3>DataTable for Searching</h3>
+                    <form enctype='multipart/form-data'>
+                        데이터를 업로드하세요: &nbsp;
+                        <input id='upload' type='file' accept='text/html' name='files[]' size='30' />
+                    </form>
                     <select id='searchType'>
                         {/*
                         <option value=''>검색할 항목을 선택하세요</option> */}
-                        <option value='식별번호'>식별번호</option>
-                        <option value='이름'>이름</option>
-                        <option value='성별'>성별</option>
-                        <option value='거주지'>거주지</option>
+                        {Object.entries(columns).map((itm, idx)=>
+                            <option value={itm[0]}>{itm[1]}</option>
+                        )}
                     </select>
-                    <input id='searchValue' type="text" placeholder="검색할 정보를 입력하세요" />
+                    <input id='searchValue' type='text' placeholder='검색할 정보를 입력하세요' />
                     <button onClick={filterFromDataTable}>찾기</button>
                     <br/><br/>
                     <div>
-                        <div className="card">
-                            <input type="text" value={tableRows} 
+                        <div className='card'>
+                            <input type='text' value={tableRows} 
                                 onInput={(e)=>{
                                     setTableRows(e.target.value);
                                 }}/> 개 행으로 출력
                             <DataTable style={{ width:'100%', minWidth:'500px' }}
-                                value={applicants} rows={tableRows} emptyMessage="해당하는 정보가 없습니다"           
+                                value={applicants} rows={tableRows} emptyMessage='해당하는 정보가 없습니다'           
                                 showGridlines paginator
-                                responsiveLayout="scroll"
-                                frozenWidth="328px" scrollable scrollHeight="275px"
+                                responsiveLayout='scroll'
+                                frozenWidth='328px' scrollable scrollHeight='275px'
+                                selectionMode="multiple" selection={selectedApplicants} 
+                                onSelectionChange={(e)=> {
+                                    console.log(e);
+                                    setSelectedApplicants(e.value) 
+                                }}
                             >
-                                <Column field="식별번호" header="식별번호" style={{maxWidth:'100px'}} sortable
+                            <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                            <Column field='rid' header='rid' style={{display:'none'}}
+                                    body={(row, ref)=>{ row['rid'] = ref.rowIndex;
+                                        return row['rid'];
+                                    }}></Column>
+                            {Object.entries(columns).map((itm, idx)=>
+                                <Column field={itm[0]} header={itm[1]} style={{maxWidth:'130px'}} sortable
                                 ></Column>
-                                <Column field="이름" header="이름" style={{maxWidth:'100px'}} sortable
-                                ></Column>
-                                <Column field="성별" header="성별" style={{maxWidth:'100px'}} sortable
-                                ></Column>
-                                <Column field="거주지" header="거주지" style={{maxWidth:'150px'}} sortable
+                            )}
+                                <Column field={mappingRow} header={mappingRow} style={{maxWidth:'130px'}} sortable
+                                        editor={(row)=>{ console.log('going to edit row', `"${row.field}"`, row.rowIndex, row.rowData);
+                                            let tgCol = row.field, tgIdx = row.rowIndex, tgRow = row.rowData;
+                                            console.log(applicants[tgIdx]);
+                                            return(
+                                            <input onInput={(e)=>{
+                                                        applicants[tgIdx][mappingRow] = e.target.value;
+                                                    }}
+                                                    onBlur={(e)=>{
+                                                        setApplicants([...applicants]);
+                                                    }}/>
+                                            );
+                                        }}
                                 ></Column>
                             </DataTable>
                         </div>
                     </div>
+                    <div>
+                        <input id='batchIpt' type='text' placeholder='일괄수정할 내용'/> 
+                        <button onClick={(e)=>{ 
+                                let valToBatch = document.getElementById('batchIpt').value;
+                                selectedApplicants.map((itm, idx)=>{
+                                    applicants[itm.rid][mappingRow] = valToBatch;
+                                })
+                                setApplicants([...applicants]);
+                            }}>선택항목 일괄수정하기</button>
+                    </div>
+                    <button onClick={(e)=>{
+
+                                let data = JSON.stringify(applicants), 
+                                    filename = `generatedResult_${new Date().toISOString().split('.')[0]}`, type = 'text'//+'/javascript'
+                                ;var file = new Blob([data], {type: type});
+                                console.log(file);
+                                if (window.navigator.msSaveOrOpenBlob) // IE10+
+                                    window.navigator.msSaveOrOpenBlob(file, filename);
+                                else { // Others
+                                    var a = document.createElement("a"),
+                                            url = URL.createObjectURL(file);
+                                    a.href = url;
+                                    a.download = filename;
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    setTimeout(function() {
+                                        document.body.removeChild(a);
+                                        window.URL.revokeObjectURL(url);  
+                                    }, 0); 
+                                }
+
+                            }}>새파일로 내보내기</button>
                 </div>
                 );
             }
                             
-            const rootElement = document.getElementById("root");
+            const rootElement = document.getElementById('root');
             ReactDOM.render(<DataTableBasicDemo />, rootElement);
 
         </script>
     </body>
 </html>
- 
