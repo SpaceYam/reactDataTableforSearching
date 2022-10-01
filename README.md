@@ -15,7 +15,7 @@ You don't need a server
 just open the html and upload and rewrite your data
 then export your data and do it again and again
 
-look at this at https://spaceyam.github.io/reactDataTableforSearching/
+look at this at https://spaceyam.github.io/reactDataTableforSearching
 </pre>
 
 &nbsp;
