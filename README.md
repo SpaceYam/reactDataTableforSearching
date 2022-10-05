@@ -1,6 +1,5 @@
-<pre>
-[https://spaceyam.github.io/reactDataTableforSearching]([https://mit-license.org/](https://spaceyam.github.io/reactDataTableforSearching)) 에서 확인하실 수 있습니다.
-</pre>
+* [https://spaceyam.github.io/reactDataTableforSearching]([https://mit-license.org/](https://spaceyam.github.io/reactDataTableforSearching)) 에서 확인하실 수 있습니다.
+
 
 License: [https://mit-license.org/](https://mit-license.org/)
 
